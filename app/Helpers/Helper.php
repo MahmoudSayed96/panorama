@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Contains app helper functions.
@@ -12,8 +13,9 @@
  * @return string
  * Return "active" if matched.
  */
-if(!function_exists('is_active_route')) {
-    function is_active_route(string $route_name = NULL){
+if (!function_exists('is_active_route')) {
+    function is_active_route(string $route_name = NULL)
+    {
         return NULL !== request()->segment(2) && request()->segment(2) == $route_name ? 'active' : '';
     }
 }
@@ -26,8 +28,16 @@ if(!function_exists('is_active_route')) {
  * @return string $slug
  * Return slug.
  */
-if(!function_exists('slug')) {
-    function slug(string $value = NULL){
+if (!function_exists('slug')) {
+    function slug(string $value = NULL)
+    {
         return strtolower(trim(str_replace(' ', '-', $value)));
+    }
+}
+
+if (!function_exists('admin')) {
+    function admin()
+    {
+        return auth()->guard('admin');
     }
 }

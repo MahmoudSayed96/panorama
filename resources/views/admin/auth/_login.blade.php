@@ -2,12 +2,12 @@
 @section('title','تسجيل الدخول')
 @section('content')
     <div class="login-box">
-        <form class="login-form" action="{{ route('admin.post_login') }}" method="POST">
+        <form class="login-form" action="{{ route('admin.login') }}" method="POST">
             @csrf
             <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>تسجيل الدخول</h3>
             <div class="form-group">
                 <label class="control-label">البريد الإلكترونى</label>
-                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"  placeholder="mail@example.com" autofocus>
+                <input class="form-control @error('email') is-invalid @enderror" name="email" type="text" placeholder="mail@example.com" autofocus>
                 @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -16,8 +16,8 @@
             </div>
             <div class="form-group">
                 <label class="control-label">كلمة المرور</label>
-                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"  placeholder="كلمة المرور">
-                @error('password')
+                <input class="form-control @error('password') is-invalid @enderror" name="password" type="password" placeholder="كلمة المرور">
+                @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -37,6 +37,6 @@
                 <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>تسجيل الدخول</button>
             </div>
         </form>
-        @include('auth.passwords.reset')
+        @include('admin.auth._forget_password')
     </div>
 @endsection
