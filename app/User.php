@@ -11,6 +11,7 @@ class User extends Authenticatable
 {
     use LaratrustUserTrait;
     use Notifiable;
+    protected const DS = DIRECTORY_SEPARATOR;
 
     /**
      * The attributes that are mass assignable.
@@ -18,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','photo'
+        'name', 'email', 'password', 'photo'
     ];
 
     /**
@@ -38,4 +39,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getPhotoAttribute()
+    {
+        return isset($this->attributes['photo']) ? asset($this->attributes['photo']) : asset('uploads' . self::DS . 'images' . self::DS . 'users' . self::DS . 'user-avatar.png');
+    }
+
+    public function getPhoto()
+    {
+        return isset($this->attributes['photo']) ? $this->attributes['photo'] : null;
+    }
 }

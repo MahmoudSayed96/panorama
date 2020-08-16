@@ -24,6 +24,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/';
     public const ADMIN = '/admin';
+    public const PAGINATE_LIMIT = 10;
 
     /**
      * Define your route model bindings, pattern filters, etc.

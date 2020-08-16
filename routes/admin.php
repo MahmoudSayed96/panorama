@@ -26,5 +26,15 @@ Route::name('admin.')->prefix('admin')->group(function () {
     Route::group(['middleware' => ['auth']], function () {
         /***** Dashboard ROUTES *****/
         Route::get('/', 'DashboardController@index')->name('welcome');
+        /***** Profile ROUTES *****/
+        Route::get('/profile', 'ProfileController@show')->name('profile.show');
+        Route::post('/profile', 'ProfileController@update')->name('profile.update');
+        /***** Products ROUTES *****/
+        Route::get('/products', 'ProductController@index')->name('products');
+        Route::get('/products/create', 'ProductController@create')->name('products.create');
+        Route::post('/products/store', 'ProductController@store')->name('products.store');
+        Route::get('/products/{id}/edit', 'ProductController@edit')->name('products.edit');
+        Route::post('/products/{id}/update', 'ProductController@update')->name('products.update');
+        Route::get('/products/{id}/delete', 'ProductController@destroy')->name('products.delete');
     });
 });
