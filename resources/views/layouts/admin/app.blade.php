@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
+
     <head>
         <meta name="description" content="">
         <!-- Twitter meta-->
@@ -23,6 +24,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/font-awesome.min.css') }}">
         @stack('styles')
     </head>
+
     <body class="app sidebar-mini">
         @include('admin.includes._header')
         @include('admin.includes._sidebar')
@@ -49,6 +51,7 @@
         <script type="text/javascript" src="{{ asset('dashboard/js/plugins/chart.js') }}"></script>
         <script>
             $(document).ready(function() {
+                // DataTables
                 $('#dt').DataTable();
                 // Image preview
                 $("#imgInp").change(function() {
@@ -57,9 +60,31 @@
                         $('#imgPreview').attr('src', e.target.result);
                     }
                     reader.readAsDataURL(this.files[0]); // convert to base64 string
+                });//end of image preview
+                // sweetalert delete btn
+            $('.delete').click(function(e){
+                e.preventDefault();
+                var that = $(this);
+                swal({
+                        title: "هل تريد حذف هذا العنصر؟",
+                        text: "لايمكن استرجاع هذا العنصر بعد الحذف",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonClass: "btn-danger",
+                        confirmButtonText: "نعم",
+                        cancelButtonText: "الغاء",
+                        closeOnConfirm: false
+                    },
+                    function(){
+                        // yes button
+                        // submite the nearest form
+                        that.closest('form').submit();
+                    //swal("Deleted!", "Your imaginary file has been deleted.", "success");
                 });
+            });// end of sweetalert
             });
         </script>
         @stack('scripts')
     </body>
+
 </html>

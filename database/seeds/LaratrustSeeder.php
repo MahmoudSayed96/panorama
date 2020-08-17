@@ -19,14 +19,21 @@ class LaratrustSeeder extends Seeder
 
         $config = config('laratrust_seeder.roles_structure');
         $mapPermission = collect(config('laratrust_seeder.permissions_map'));
+        $mapRolesName = [
+            'super_admin' => 'مدير النظام',
+            'admin' => 'مدير',
+            'user' => 'مستخدم'
+        ];
 
         foreach ($config as $key => $modules) {
 
             // Create a new role
             $role = \App\Role::firstOrCreate([
                 'name' => $key,
-                'display_name' => ucwords(str_replace('_', ' ', $key)),
-                'description' => ucwords(str_replace('_', ' ', $key))
+                // 'display_name' => ucwords(str_replace('_', ' ', $key)),
+                // 'description' => ucwords(str_replace('_', ' ', $key))
+                'display_name' => $mapRolesName[$key],
+                'description' => $mapRolesName[$key]
             ]);
             $permissions = [];
 
@@ -40,7 +47,7 @@ class LaratrustSeeder extends Seeder
                     $permissionValue = $mapPermission->get($perm);
 
                     $permissions[] = \App\Permission::firstOrCreate([
-                        'name' => $module . '_' . $permissionValue,
+                        'name' => $permissionValue . '_' . $module,
                         'display_name' => ucfirst($permissionValue) . ' ' . ucfirst($module),
                         'description' => ucfirst($permissionValue) . ' ' . ucfirst($module),
                     ])->id;

@@ -14,9 +14,11 @@ return [
     'roles_structure' => [
         'super_admin' => [
             'users' => 'c,r,u,d',
+            'products' => 'c,r,u,d',
+            'roles' => 'c,r,u,d',
         ],
-        'admin' => [
-        ]
+        'admin' => [],
+        'user' => [],
     ],
 
     'permissions_map' => [

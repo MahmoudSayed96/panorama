@@ -10,14 +10,14 @@
             <label>الاسم</label>
             <input type="text" class="form-control" name="name" value="{{ currentUser()->name }}">
             @error('name')
-                <div class="text-danger">{{ $message }}</div>
+            <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group">
             <label>البريد الالكترونى</label>
             <input type="email" class="form-control" name="email" value="{{ currentUser()->email }}">
             @error('email')
-                <div class="text-danger">{{ $message }}</div>
+            <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group">
@@ -26,20 +26,23 @@
                     <label>الصورة الشخصية</label>
                     <input type="file" id="imgInp" class="form-control" name="photo">
                     @error('photo')
-                        <div class="text-danger">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col-12 col-md-6">
-                    <img src="{{ currentUser()->photo }}" class="img-fluid img-thumbnail" width="100px" height="100px" id="imgPreview" alt="{{ currentUser()->name }}">
+                    <img src="{{ currentUser()->photo }}" class="img-fluid img-thumbnail" width="100px" height="100px"
+                        id="imgPreview" alt="{{ currentUser()->name }}">
                 </div>
             </div>
         </div>
-      <div class="row mb-10">
-        <div class="from-group">
-            <button type="button" class="btn btn-warning ml-1" onclick="history.back();"><i class="fa fa-fw -fa-lg fa-arrow-right"></i> تراجع</button>
-            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>تحديث</button>
+        <div class="row mb-10">
+            <div class="from-group">
+                <button type="button" class="btn btn-warning ml-1" onclick="history.back();"><i
+                        class="fa fa-fw -fa-lg fa-arrow-right"></i> تراجع</button>
+                <button class="btn btn-primary" type="submit"><i
+                        class="fa fa-fw fa-lg fa-check-circle"></i>تحديث</button>
+            </div>
         </div>
-      </div>
     </form>
-  </div>
+</div>
 @endsection

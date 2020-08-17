@@ -21,6 +21,7 @@
             </a>
         </li>
         {{-- Products --}}
+        @if (currentUser()->isAbleTo('*_products'))
         <li class="treeview {{ is_active_route('products') ? 'is-expanded' : '' }}">
             <a class="app-menu__item {{ is_active_route('products') ? 'active' : '' }}" href="#" data-toggle="treeview">
                 <i class="app-menu__icon fa fa-building"></i>
@@ -28,15 +29,34 @@
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li>
-                    <a class="treeview-item" href="{{ route('admin.products') }}">
-                        <i class="icon fa fa-circle-o"></i>عرض الكل</a>
-                </li>
-                <li>
-                    <a class="treeview-item" href="{{ route('admin.products.create') }}">
-                        <i class="icon fa fa-circle-o"></i>أضافة منتج</a>
-                </li>
+                @if (currentUser()->hasPermission('read_products'))
+                <li><a class="treeview-item" href="{{ route('admin.products') }}"><i class="icon fa fa-list"></i>عرض
+                        الكل</a></li>
+                @endif
+                @if (currentUser()->hasPermission('create_products'))
+                <li><a class="treeview-item" href="{{ route('admin.products.create') }}"><i
+                            class="icon fa fa-plus"></i>أضافة جديدة</a></li>
+                @endif
             </ul>
         </li>
+        @endif
+
+
+        {{-- Roles --}}
+        @if (currentUser()->isAbleTo('*_roles'))
+        <li class="treeview {{ is_active_route('roles') ? 'is-expanded' : '' }}">
+            <a class="app-menu__item {{ is_active_route('roles') ? 'active' : '' }}" href="#" data-toggle="treeview">
+                <i class="app-menu__icon fa fa-lock"></i>
+                <span class="app-menu__label">الصلاحيات</span>
+                <i class="treeview-indicator fa fa-angle-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                @if (currentUser()->hasPermission('read_roles'))
+                <li><a class="treeview-item" href="{{ route('admin.roles') }}"><i class="icon fa fa-list"></i>عرض
+                        الكل</a></li>
+                @endif
+            </ul>
+        </li>
+        @endif
     </ul>
 </aside>
