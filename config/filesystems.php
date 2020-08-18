@@ -57,7 +57,13 @@ return [
 
         'users' => [
             'driver' => 'local',
-            'root' => public_path('uploads/images/users'),
+            'root' => public_path('uploads' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'users'),
+            'url' => env('APP_URL') . '/storage',
+            'visibility' => 'public',
+        ],
+        'offers' => [
+            'driver' => 'local',
+            'root' => public_path('uploads' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'offers'),
             'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],

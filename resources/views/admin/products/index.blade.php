@@ -56,9 +56,6 @@
                                                             class="fa fa-trash-o fa-lg"></i>
                                                         حذف</button>
                                                 </form>
-                                                {{-- <a href="{{ route('admin.products.delete',$product->id) }}"
-                                                class="btn btn-danger btn-sm"><i class="fa fa-trash-o fa-lg"></i>
-                                                حذف</a> --}}
                                                 @endif
                                             </td>
                                         </tr>

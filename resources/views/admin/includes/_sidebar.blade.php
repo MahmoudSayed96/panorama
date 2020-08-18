@@ -40,6 +40,26 @@
             </ul>
         </li>
         @endif
+        {{-- Offers --}}
+        @if (currentUser()->isAbleTo('*_offers'))
+        <li class="treeview {{ is_active_route('offers') ? 'is-expanded' : '' }}">
+            <a class="app-menu__item {{ is_active_route('offers') ? 'active' : '' }}" href="#" data-toggle="treeview">
+                <i class="app-menu__icon fa fa-handshake-o"></i>
+                <span class="app-menu__label">العروض</span>
+                <i class="treeview-indicator fa fa-angle-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                @if (currentUser()->hasPermission('read_offers'))
+                <li><a class="treeview-item" href="{{ route('admin.offers') }}"><i class="icon fa fa-list"></i>عرض
+                        الكل</a></li>
+                @endif
+                @if (currentUser()->hasPermission('create_offers'))
+                <li><a class="treeview-item" href="{{ route('admin.offers.create') }}"><i
+                            class="icon fa fa-plus"></i>أضافة جديدة</a></li>
+                @endif
+            </ul>
+        </li>
+        @endif
 
 
         {{-- Roles --}}

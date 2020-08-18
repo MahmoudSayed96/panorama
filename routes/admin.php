@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
@@ -36,9 +37,24 @@ Route::name('admin.')->prefix('admin')->group(function () {
         Route::get('/products/{id}/edit', 'ProductController@edit')->name('products.edit');
         Route::post('/products/{id}/update', 'ProductController@update')->name('products.update');
         Route::post('/products/{id}/delete', 'ProductController@destroy')->name('products.delete');
+        /***** OFFERS ROUTES *****/
+        Route::get('/offers', 'OfferController@index')->name('offers');
+        Route::get('/offers/create', 'OfferController@create')->name('offers.create');
+        Route::post('/offers/store', 'OfferController@store')->name('offers.store');
+        Route::get('/offers/{id}/show', 'OfferController@show')->name('offers.show');
+        Route::get('/offers/{id}/edit', 'OfferController@edit')->name('offers.edit');
+        Route::post('/offers/{id}/update', 'OfferController@update')->name('offers.update');
+        Route::post('/offers/{id}/delete', 'OfferController@destroy')->name('offers.delete');
         /***** ROLES ROUTES *****/
         Route::get('/roles', 'RoleController@index')->name('roles');
         Route::get('/roles/{id}/edit', 'RoleController@edit')->name('roles.edit');
         Route::post('/roles/{id}/update', 'RoleController@update')->name('roles.update');
     });
+});
+
+Route::get('/test', function () {
+    $offer = \App\Models\Offer::find(1);
+    return $offer->getPhotos();
+    // $product = \App\Models\Product::find(1);
+    // return $product->offers;
 });

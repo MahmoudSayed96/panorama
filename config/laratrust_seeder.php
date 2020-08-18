@@ -15,6 +15,7 @@ return [
         'super_admin' => [
             'users' => 'c,r,u,d',
             'products' => 'c,r,u,d',
+            'offers' => 'c,r,u,d',
             'roles' => 'c,r,u,d',
         ],
         'admin' => [],

@@ -35,7 +35,6 @@
         <script src="{{ asset('dashboard/js/jquery-3.3.1.min.js') }}"></script>
         <script src="{{ asset('dashboard/js/popper.min.js') }}"></script>
         <script src="{{ asset('dashboard/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('dashboard/js/main.js') }}"></script>
         <!-- The javascript plugin to display page loading on top-->
         <script src="{{ asset('dashboard/js/plugins/pace.min.js') }}"></script>
         <!-- The javascript plugin to datatables-->
@@ -43,47 +42,14 @@
         <script src="{{ asset('dashboard/js/plugins/dataTables.bootstrap-ar.min.js') }}"></script>
         <!-- The javascript plugin to notify-->
         <script src="{{ asset('dashboard/js/plugins/bootstrap-notify.min.js') }}"></script>
-        <!-- The javascript plugin to sweetAlert-->
-        <script src="{{ asset('dashboard/js/plugins/bootstrap-notify.min.js') }}"></script>
-        <!-- The javascript plugin to select-->
+        <!-- The javascript plugin to select2-->
+        <script src="{{ asset('dashboard/js/plugins/select2.min.js') }}"></script>
+        <!-- The javascript plugin to swweetAlert-->
         <script src="{{ asset('dashboard/js/plugins/sweetalert.min.js') }}"></script>
         <!-- Page specific javascripts-->
         <script type="text/javascript" src="{{ asset('dashboard/js/plugins/chart.js') }}"></script>
-        <script>
-            $(document).ready(function() {
-                // DataTables
-                $('#dt').DataTable();
-                // Image preview
-                $("#imgInp").change(function() {
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                        $('#imgPreview').attr('src', e.target.result);
-                    }
-                    reader.readAsDataURL(this.files[0]); // convert to base64 string
-                });//end of image preview
-                // sweetalert delete btn
-            $('.delete').click(function(e){
-                e.preventDefault();
-                var that = $(this);
-                swal({
-                        title: "هل تريد حذف هذا العنصر؟",
-                        text: "لايمكن استرجاع هذا العنصر بعد الحذف",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonClass: "btn-danger",
-                        confirmButtonText: "نعم",
-                        cancelButtonText: "الغاء",
-                        closeOnConfirm: false
-                    },
-                    function(){
-                        // yes button
-                        // submite the nearest form
-                        that.closest('form').submit();
-                    //swal("Deleted!", "Your imaginary file has been deleted.", "success");
-                });
-            });// end of sweetalert
-            });
-        </script>
+        {{-- Custome js code  --}}
+        <script src="{{ asset('dashboard/js/main.js') }}"></script>
         @stack('scripts')
     </body>
 

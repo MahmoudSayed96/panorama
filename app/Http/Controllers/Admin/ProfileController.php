@@ -33,7 +33,7 @@ class ProfileController extends Controller
                 $old_photo = $user->getPhoto();
                 if (isset($old_photo)) {
                     // Remove old
-                    removeImage('users', $old_photo);
+                    removeImage($old_photo);
                 }
                 // Update photo
                 $photo_path = uploadImage('users', $request->photo);

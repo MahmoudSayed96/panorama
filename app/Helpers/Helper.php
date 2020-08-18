@@ -89,11 +89,57 @@ if (!function_exists('uploadImage')) {
  *  Image name.
  */
 if (!function_exists('removeImage')) {
-    function removeImage($folder, $image)
+    function removeImage($image)
     {
         $imagePath = public_path() . DS . $image;
         if (file_exists($imagePath)) {
             unlink($imagePath);
+        }
+    }
+}
+
+/**
+ * Implement function for upload multiple images from folder.
+ *
+ * @param string $distention
+ *  Folder name that contains images folders inside it.
+ * @param $images
+ *  Images from request.
+ */
+if (!function_exists('uploadMultipleImages')) {
+    function uploadMultipleImages($distention, $images)
+    {
+        $images_arr = array();
+        if ($files = $images) {
+            foreach ($files as $file) {
+                $file->store(DS, $distention);
+                $image_name = $file->hashName();
+                $image_path = 'uploads' . DS . 'images' . DS . $distention . DS . $image_name;
+                $images_arr[] = $image_path;
+            }
+        }
+        //implode images with pipe symbol
+        $allImages = implode("|", $images_arr);
+        return $allImages;
+    }
+}
+
+/**
+ * Implement function for remove multiple images from folder.
+ *
+ * @param string $distention
+ *  Folder name that contains images folders inside it.
+ * @param $images
+ *  Images from request.
+ */
+if (!function_exists('removeMultipleImages')) {
+    function removeMultipleImages($images)
+    {
+        foreach ($images as $image) {
+            $imagePath = public_path() . DS . $image;
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
         }
     }
 }
