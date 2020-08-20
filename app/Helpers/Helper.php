@@ -143,3 +143,18 @@ if (!function_exists('removeMultipleImages')) {
         }
     }
 }
+
+/**
+ * Implement function for format decimal numbers.
+ * 
+ * @param $number.
+ * Number to format it.
+ * @return $format.
+ * Return number after format it.
+ */
+if (!function_exists('formatNumber')) {
+    function formatNumber($number)
+    {
+        return number_format($number, 2);
+    }
+}

@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Product;
-use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,6 +43,23 @@ Route::name('admin.')->prefix('admin')->group(function () {
         Route::get('/offers/{id}/edit', 'OfferController@edit')->name('offers.edit');
         Route::post('/offers/{id}/update', 'OfferController@update')->name('offers.update');
         Route::post('/offers/{id}/delete', 'OfferController@destroy')->name('offers.delete');
+        /***** SALES ROUTES *****/
+        Route::name('sales.')->prefix('sales')->group(function () {
+            /***** COMPANY SALES ROUTES *****/
+            Route::get('/company', 'CompanySalesController@index')->name('company');
+            Route::get('/company/create', 'CompanySalesController@create')->name('company.create');
+            Route::post('/company/store', 'CompanySalesController@store')->name('company.store');
+            Route::get('/company/{id}/edit', 'CompanySalesController@edit')->name('company.edit');
+            Route::post('/company/{id}/update', 'CompanySalesController@update')->name('company.update');
+            Route::post('/company/{id}/delete', 'CompanySalesController@destroy')->name('company.delete');
+            /***** OUT COMPANY SALES ROUTES *****/
+            Route::get('/out-company', 'OutCompanySalesController@index')->name('out_company');
+            Route::get('/out-company/create', 'OutCompanySalesController@create')->name('out_company.create');
+            Route::post('/out-company/store', 'OutCompanySalesController@store')->name('out_company.store');
+            Route::get('/out-company/{id}/edit', 'OutCompanySalesController@edit')->name('out_company.edit');
+            Route::post('/out-company/{id}/update', 'OutCompanySalesController@update')->name('out_company.update');
+            Route::post('/out-company/{id}/delete', 'OutCompanySalesController@destroy')->name('out_company.delete');
+        });
         /***** ROLES ROUTES *****/
         Route::get('/roles', 'RoleController@index')->name('roles');
         Route::get('/roles/{id}/edit', 'RoleController@edit')->name('roles.edit');

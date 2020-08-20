@@ -27,7 +27,7 @@ class OfferRequest extends FormRequest
         return [
             'product' => ['required', 'integer', 'exists:products,id'],
             'prod_owner' => ['required', 'string', 'min:3', 'max:190'],
-            'prod_owner_phone' => ['required', 'max:190'],
+            'prod_owner_phone' => ['required', 'unique:offers', 'max:190'],
             'prod_area' => ['required', 'numeric'],
             'prod_price' => ['required', 'numeric'],
             'photos' => ['required'],
@@ -49,6 +49,7 @@ class OfferRequest extends FormRequest
             'numeric' => 'القيمة يجب ان تكون رقم',
             'string' => 'القيمة يجب ان تكون احرف',
             'exists' => 'هذا العنصر غير موجود',
+            'unique' => 'هذا الرقم موجود بالفعل',
             'photos.*.mimes' => 'الملف يجب ان يكون صورة بامتداد png,jpg,jpeg,gif',
             'photos.*.max' => 'الصورة يجب الاتكون اكبر من 2ميجا'
         ];

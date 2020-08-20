@@ -55,7 +55,7 @@
                             {{-- Product Owner Phone--}}
                             <div class="form-group">
                                 <label for="prod_owner_phone" class="control-label">رقم صاحب المنتج</label>
-                                <input type="text" name="prod_owner_phone" id="prod_owner_phone"
+                                <input type="number" name="prod_owner_phone" id="prod_owner_phone"
                                     value="{{ $offer->prod_owner_phone }}"
                                     class="form-control @error('prod_owner_phone') is-invalid @enderror" required>
                                 @error('prod_owner_phone')

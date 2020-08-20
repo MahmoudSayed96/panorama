@@ -50,7 +50,6 @@ class OfferController extends Controller
             ]);
             return $this->redirectIfSuccess('admin.offers');
         } catch (\Exception $ex) {
-            return $ex;
             return $this->redirectIfError('admin.offers');
         }
     }
@@ -107,7 +106,6 @@ class OfferController extends Controller
             }
             return $this->redirectIfSuccess('admin.offers');
         } catch (\Exception $ex) {
-            return $ex;
             return $this->redirectIfError('admin.offers');
         }
     }

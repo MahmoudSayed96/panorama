@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Sales\CompanySales;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -14,5 +15,10 @@ class Product extends Model
     public function offers()
     {
         return $this->hasMany(Offer::class);
+    }
+
+    public function companySales()
+    {
+        return $this->hasMany(CompanySales::class);
     }
 }

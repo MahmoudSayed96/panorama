@@ -86,6 +86,16 @@ class ProductController extends Controller
             if (!isset($product)) {
                 return $this->redirectIfNotFound('admin.products');
             }
+            // Check if has an offers
+            $offers = $product->offers();
+            if (isset($offers) && count($offers) > 0) {
+                return $this->redirectIfError('admin.products', 'لا يمكن حذف هذا المنتج لارتباطه ببعض العروض');
+            }
+            // Check if has an sales
+            $companySales = $product->companySales();
+            if (isset($companySales) && count($companySales) > 0) {
+                return $this->redirectIfError('admin.products', 'لا يمكن حذف هذا المنتج لارتباطه ببعض المبيعات');
+            }
             $product->delete();
             return $this->redirectIfSuccess('admin.products', 'تم حذف البيانات بنجاح');
         } catch (\Exception $ex) {

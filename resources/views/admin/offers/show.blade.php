@@ -40,7 +40,7 @@
                             </li>
                             <li class="list-group-item">
                                 <strong> <i class="fa fa-money fa-lg text-primary"></i> السعر:
-                                </strong> {{ $offer->prod_price }}
+                                </strong> {{ formatNumber($offer->prod_price) }}
                             </li>
                         </ul>
                     </div>
