@@ -4,7 +4,7 @@
 
 <div class="app-title">
     <div>
-        <h1><i class="fa fa-handshake-o"></i> المبيعات</h1>
+        <h1><i class="fa fa-diamond"></i> المبيعات</h1>
     </div>
     <ul class="app-breadcrumb breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.welcome') }}"><i class="fa fa-dashboard"></i> الرئيسية</a>

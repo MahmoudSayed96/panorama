@@ -25,9 +25,11 @@ Route::name('admin.')->prefix('admin')->group(function () {
     Route::group(['middleware' => ['auth']], function () {
         /***** DASHBOARD ROUTES *****/
         Route::get('/', 'DashboardController@index')->name('welcome');
+
         /***** PROFILE ROUTES *****/
         Route::get('/profile', 'ProfileController@show')->name('profile.show');
         Route::post('/profile', 'ProfileController@update')->name('profile.update');
+
         /***** PRODUCTS ROUTES *****/
         Route::get('/products', 'ProductController@index')->name('products');
         Route::get('/products/create', 'ProductController@create')->name('products.create');
@@ -35,6 +37,7 @@ Route::name('admin.')->prefix('admin')->group(function () {
         Route::get('/products/{id}/edit', 'ProductController@edit')->name('products.edit');
         Route::post('/products/{id}/update', 'ProductController@update')->name('products.update');
         Route::post('/products/{id}/delete', 'ProductController@destroy')->name('products.delete');
+
         /***** OFFERS ROUTES *****/
         Route::get('/offers', 'OfferController@index')->name('offers');
         Route::get('/offers/create', 'OfferController@create')->name('offers.create');
@@ -43,6 +46,8 @@ Route::name('admin.')->prefix('admin')->group(function () {
         Route::get('/offers/{id}/edit', 'OfferController@edit')->name('offers.edit');
         Route::post('/offers/{id}/update', 'OfferController@update')->name('offers.update');
         Route::post('/offers/{id}/delete', 'OfferController@destroy')->name('offers.delete');
+
+
         /***** SALES ROUTES *****/
         Route::name('sales.')->prefix('sales')->group(function () {
             /***** COMPANY SALES ROUTES *****/
@@ -52,6 +57,7 @@ Route::name('admin.')->prefix('admin')->group(function () {
             Route::get('/company/{id}/edit', 'CompanySalesController@edit')->name('company.edit');
             Route::post('/company/{id}/update', 'CompanySalesController@update')->name('company.update');
             Route::post('/company/{id}/delete', 'CompanySalesController@destroy')->name('company.delete');
+
             /***** OUT COMPANY SALES ROUTES *****/
             Route::get('/out-company', 'OutCompanySalesController@index')->name('out_company');
             Route::get('/out-company/create', 'OutCompanySalesController@create')->name('out_company.create');
@@ -60,6 +66,36 @@ Route::name('admin.')->prefix('admin')->group(function () {
             Route::post('/out-company/{id}/update', 'OutCompanySalesController@update')->name('out_company.update');
             Route::post('/out-company/{id}/delete', 'OutCompanySalesController@destroy')->name('out_company.delete');
         });
+
+
+        /***** INVESTMENTS ROUTES *****/
+        Route::name('investments.')->prefix('investments')->group(function () {
+            /*****  RENT ROUTES *****/
+            Route::get('/rents', 'RentController@index')->name('rents');
+            Route::get('/rents/create', 'RentController@create')->name('rents.create');
+            Route::post('/rents/store', 'RentController@store')->name('rents.store');
+            Route::get('/rents/{id}/edit', 'RentController@edit')->name('rents.edit');
+            Route::post('/rents/{id}/update', 'RentController@update')->name('rents.update');
+            Route::post('/rents/{id}/delete', 'RentController@destroy')->name('rents.delete');
+
+            /*****  PREMIUMS ROUTES *****/
+            Route::get('/premiums', 'PremiumController@index')->name('premiums');
+            Route::get('/premiums/create', 'PremiumController@create')->name('premiums.create');
+            Route::post('/premiums/store', 'PremiumController@store')->name('premiums.store');
+            Route::get('/premiums/{id}/edit', 'PremiumController@edit')->name('premiums.edit');
+            Route::post('/premiums/{id}/update', 'PremiumController@update')->name('premiums.update');
+            Route::post('/premiums/{id}/delete', 'PremiumController@destroy')->name('premiums.delete');
+
+            /*****  MANAGEMENTS ROUTES *****/
+            Route::get('/managements', 'ManagementController@index')->name('managements');
+            Route::get('/managements/create', 'ManagementController@create')->name('managements.create');
+            Route::post('/managements/store', 'ManagementController@store')->name('managements.store');
+            Route::get('/managements/{id}/edit', 'ManagementController@edit')->name('managements.edit');
+            Route::post('/managements/{id}/update', 'ManagementController@update')->name('managements.update');
+            Route::post('/managements/{id}/delete', 'ManagementController@destroy')->name('managements.delete');
+        });
+
+
         /***** ROLES ROUTES *****/
         Route::get('/roles', 'RoleController@index')->name('roles');
         Route::get('/roles/{id}/edit', 'RoleController@edit')->name('roles.edit');

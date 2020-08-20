@@ -65,7 +65,7 @@
         @if (currentUser()->isAbleTo('*_sales'))
         <li class="treeview {{ is_active_route('sales') ? 'is-expanded' : '' }}">
             <a class="app-menu__item {{ is_active_route('sales') ? 'active' : '' }}" href="#" data-toggle="treeview">
-                <i class="app-menu__icon fa fa-money"></i>
+                <i class="app-menu__icon fa fa-diamond"></i>
                 <span class="app-menu__label">المبيعات</span>
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
@@ -77,6 +77,31 @@
                 <li><a class="treeview-item" href="{{ route('admin.sales.out_company') }}"><i
                             class="icon fa fa-map-marker"></i>
                         خارج الشركة</a></li>
+                @endif
+            </ul>
+        </li>
+        @endif
+
+        {{-- Investments --}}
+        @if (currentUser()->isAbleTo('*_investments'))
+        <li class="treeview {{ is_active_route('investments') ? 'is-expanded' : '' }}">
+            <a class="app-menu__item {{ is_active_route('investments') ? 'active' : '' }}" href="#"
+                data-toggle="treeview">
+                <i class="app-menu__icon fa fa-money"></i>
+                <span class="app-menu__label">الاستثمارات</span>
+                <i class="treeview-indicator fa fa-angle-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                @if (currentUser()->hasPermission('read_investments'))
+                <li><a class="treeview-item" href="{{ route('admin.investments.rents') }}"><i
+                            class="icon fa fa-lightbulb-o"></i>
+                        ايجار برنامج</a></li>
+                <li><a class="treeview-item" href="{{ route('admin.investments.premiums') }}"><i
+                            class="icon fa fa-credit-card-alt"></i>
+                        عملاء الأقساط والتمويل</a></li>
+                <li><a class="treeview-item" href="{{ route('admin.investments.managements') }}"><i
+                            class="icon fa fa-black-tie"></i>
+                        ادارة املاك</a></li>
                 @endif
             </ul>
         </li>

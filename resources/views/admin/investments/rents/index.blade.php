@@ -1,29 +1,29 @@
 @extends('layouts.admin.app')
-@section('title','المبيعات')
+@section('title','الاستثمارات')
 @section('content')
 <div class="app-title">
     <div>
-        <h1><i class="fa fa-diamond"></i> المبيعات</h1>
+        <h1><i class="fa fa-money"></i> الاستثمارات</h1>
     </div>
     <ul class="app-breadcrumb breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.welcome') }}"><i
                     class="fa fa-dashboard fa-lg"></i>الرئيسية</a></li>
-        <li class="breadcrumb-item active">المبيعات</li>
+        <li class="breadcrumb-item active">الاستثمارات</li>
     </ul>
 </div>
 <div class="row">
     <div class="col-12">
         @include('admin.includes._messages')
         <div class="tile">
-            <h2 class="tile-title">المبيعات خارج الشركة</h2>
-            @if (currentUser()->hasPermission('create_sales'))
+            <h2 class="tile-title">ايجار برنامج</h2>
+            @if (currentUser()->hasPermission('create_investments'))
             <div class="tile-title">
-                <a href="{{ route('admin.sales.out_company.create') }}" class="btn btn-success">اضاف جديد <i
+                <a href="{{ route('admin.investments.rents.create') }}" class="btn btn-success">اضاف جديد <i
                         class="fa fa-plus fa-fw fa-lg" aria-hidden="true"></i></a>
             </div>
             @endif
             <div class="tile-body">
-                @if (isset($outCompanySales) && count($outCompanySales) > 0)
+                @if (isset($rents) && count($rents) > 0)
                 <div class="table-responsive">
                     <div id="dt_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
                         <div class="row">
@@ -37,48 +37,43 @@
                                                 aria-label="التاريخ: activate to sort column descending">التاريخ</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="dt" rowspan="1"
                                                 colspan="1" aria-sort="ascending"
-                                                aria-label="اسم المشترى: activate to sort column descending">اسم
-                                                المشترى</th>
+                                                aria-label="اسم العميل: activate to sort column descending">اسم
+                                                العميل</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="dt" rowspan="1"
                                                 colspan="1" aria-sort="ascending"
-                                                aria-label="رقم المشترى: activate to sort column descending">رقم
-                                                المشترى</th>
+                                                aria-label="رقم العميل: activate to sort column descending">رقم
+                                                العميل</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="dt" rowspan="1"
                                                 colspan="1" aria-sort="ascending"
                                                 aria-label="المنتج: activate to sort column descending">المنتج</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="dt" rowspan="1"
                                                 colspan="1" aria-sort="ascending"
-                                                aria-label="يوجد وسيط: activate to sort column descending">يوجد وسيط
+                                                aria-label="نوع العقد: activate to sort column descending">نوع العقد
                                             </th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="dt" rowspan="1"
                                                 colspan="1" aria-sort="ascending"
                                                 aria-label="السعر: activate to sort column descending">السعر</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="dt" rowspan="1"
-                                                colspan="1" aria-sort="ascending"
-                                                aria-label="الدلالة: activate to sort column descending">الدلالة</th>
                                             <th>التحكم</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($outCompanySales as $index=>$outCompany)
+                                        @foreach ($rents as $index=>$rent)
                                         <tr role="row" class="{{ $index % 2 == 0 ? 'even' : 'odd' }}">
                                             <td class="sorting_1">
-                                                {{ $outCompany->created_at->toDateString() }}</td>
-                                            <td class="sorting_1">{{ $outCompany->buyer_name }}</td>
-                                            <td class="sorting_1">{{ $outCompany->buyer_phone }}</td>
-                                            <td class="sorting_1">{{ $outCompany->product->name }}</td>
-                                            <td class="sorting_1">{{ $outCompany->getWasit() }}</td>
-                                            <td class="sorting_1">{{ formatNumber($outCompany->price) }}</td>
-                                            <td class="sorting_1">{{ $outCompany->indication }}</td>
+                                                {{ $rent->created_at->toDateString() }}</td>
+                                            <td class="sorting_1">{{ $rent->client_name }}</td>
+                                            <td class="sorting_1">{{ $rent->client_phone }}</td>
+                                            <td class="sorting_1">{{ $rent->product->name }}</td>
+                                            <td class="sorting_1">{{ $rent->contract_type }}</td>
+                                            <td class="sorting_1">{{ formatNumber($rent->price) }}</td>
                                             <td>
-                                                @if (currentUser()->hasPermission('update_sales'))
-                                                <a href="{{ route('admin.sales.out_company.edit',$outCompany->id) }}"
+                                                @if (currentUser()->hasPermission('update_investments'))
+                                                <a href="{{ route('admin.investments.rents.edit',$rent->id) }}"
                                                     class="btn btn-warning btn-sm ml-3"><i
                                                         class="fa fa-pencil-square fa-lg"></i> تعديل</a>
                                                 @endif
-                                                @if (currentUser()->hasPermission('delete_sales'))
-                                                <form
-                                                    action="{{ route('admin.sales.out_company.delete',$outCompany->id) }}"
+                                                @if (currentUser()->hasPermission('delete_investments'))
+                                                <form action="{{ route('admin.investments.rents.delete',$rent->id) }}"
                                                     method="POST" style="display:inline-block" class="ml-3">
                                                     @csrf
                                                     <button type="submit" class="btn btn-danger btn-sm delete"><i
