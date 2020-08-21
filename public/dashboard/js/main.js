@@ -36,9 +36,21 @@
     $("[data-toggle='tooltip']").tooltip();
 
     // DataTables
-    $("#dt").DataTable();
+    $("#dt").DataTable({
+        responsive: true
+    });
     // Select2
     $(".select2").select2();
+    // Date picker
+    $(".selectDate").datepicker({
+        format: "yyyy-mm-dd",
+        autoclose: true,
+        todayHighlight: true
+    });
+    // CKeditor
+    CKEDITOR.replace("editor", {
+        language: "ar"
+    });
     // Image preview
     $("#imgInp").change(function() {
         var reader = new FileReader();

@@ -15,6 +15,12 @@ class CreatePremiaTable extends Migration
     {
         Schema::create('premia', function (Blueprint $table) {
             $table->id();
+            $table->string('client_name');
+            $table->string('client_phone')->unique();
+            $table->text('details')->nullable();
+            $table->decimal('alqist_amount', 10, 2);
+            $table->decimal('remaining_amount', 10, 2);
+            $table->date('end_amount_date');
             $table->timestamps();
         });
     }

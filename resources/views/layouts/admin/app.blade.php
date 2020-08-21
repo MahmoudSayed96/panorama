@@ -48,6 +48,10 @@
         <script src="{{ asset('dashboard/js/plugins/sweetalert.min.js') }}"></script>
         <!-- Page specific javascripts-->
         <script type="text/javascript" src="{{ asset('dashboard/js/plugins/chart.js') }}"></script>
+        <!-- Page datepicker javascripts-->
+        <script type="text/javascript" src="{{ asset('dashboard/js/plugins/bootstrap-datepicker.min.js') }}"></script>
+        <!-- CKeditor -->
+        <script type="text/javascript" src="{{ asset('dashboard/plugins/ckeditor/ckeditor.js') }}"></script>
         {{-- Custome js code  --}}
         <script src="{{ asset('dashboard/js/main.js') }}"></script>
         @stack('scripts')
