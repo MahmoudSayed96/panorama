@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Investments\Premium\PremiumRequest;
 use App\Http\Requests\Admin\Investments\Premium\UpdatePremiumRequest;
-use App\Models\Premium;
+use App\Models\Investments\Premium;
 use App\Providers\RouteServiceProvider;
 use App\Traits\ErrorHandlerTrait;
 

@@ -94,19 +94,30 @@
             <ul class="treeview-menu">
                 @if (currentUser()->hasPermission('read_investments'))
                 <li><a class="treeview-item" href="{{ route('admin.investments.rents') }}"><i
-                            class="icon fa fa-lightbulb-o"></i>
+                            class="icon fa fa-lightbulb-o fa-lg"></i>
                         ايجار برنامج</a></li>
                 <li><a class="treeview-item" href="{{ route('admin.investments.premiums') }}"><i
                             class="icon fa fa-credit-card-alt"></i>
                         عملاء الأقساط والتمويل</a></li>
-                <li><a class="treeview-item" href="{{ route('admin.investments.managements') }}"><i
+                <li>
+                    <a class="treeview-item" href="{{ route('admin.investments.manag_company_amalak') }}"><i
                             class="icon fa fa-black-tie"></i>
-                        ادارة املاك</a></li>
+                        ادارة املاك الشركة</a>
+                </li>
+                <li>
+                    <a class="treeview-item" href="{{ route('admin.investments.manag_clients_amalak') }}"><i
+                            class="icon fa fa-black-tie"></i>
+                        ادارة املاك عملاء اخرون</a>
+                </li>
+                <li>
+                    <a class="treeview-item" href="{{ route('admin.investments.out_investments') }}"><i
+                            class="icon fa fa-black-tie"></i>
+                        ادارة استثمارات خارجية</a>
+                </li>
                 @endif
             </ul>
         </li>
         @endif
-
 
         {{-- Roles --}}
         @if (currentUser()->isAbleTo('*_roles'))

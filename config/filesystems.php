@@ -67,6 +67,12 @@ return [
             'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],
+        'investments' => [
+            'driver' => 'local',
+            'root' => public_path('uploads' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'investments'),
+            'url' => env('APP_URL') . '/storage',
+            'visibility' => 'public',
+        ],
 
         's3' => [
             'driver' => 's3',

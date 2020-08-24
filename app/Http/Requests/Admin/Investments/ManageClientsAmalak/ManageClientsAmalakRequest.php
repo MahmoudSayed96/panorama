@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Investments\Managment;
+namespace App\Http\Requests\Admin\Investments\ManageClientsAmalak;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateManagmentRequest extends FormRequest
+class ManageClientsAmalakRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

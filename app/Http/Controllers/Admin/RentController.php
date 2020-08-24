@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Investments\Rent\RentRequest;
 use App\Http\Requests\Admin\Investments\Rent\UpdateRentRequest;
 use App\Models\Product;
-use App\Models\Rent;
+use App\Models\Investments\Rent;
 use App\Providers\RouteServiceProvider;
 use App\Traits\ErrorHandlerTrait;
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateManagmentsTable extends Migration
+class CreateManageCompanyAmalaksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateManagmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('managments', function (Blueprint $table) {
+        Schema::create('manage_company_amalaks', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateManagmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('managments');
+        Schema::dropIfExists('manage_company_amalaks');
     }
 }
