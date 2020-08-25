@@ -1,9 +1,9 @@
 @extends('layouts.admin.app')
-@section('title','المبيعات')
+@section('title','المبيعات |التسويق')
 @section('content')
 <div class="app-title">
     <div>
-        <h1><i class="fa fa-diamond"></i> المبيعات</h1>
+        <h1><i class="fa fa-handshake-o"></i> التسويق</h1>
     </div>
     <ul class="app-breadcrumb breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.welcome') }}"><i
@@ -15,15 +15,15 @@
     <div class="col-12">
         @include('admin.includes._messages')
         <div class="tile">
-            <h2 class="tile-title">مبيعات الشركة</h2>
-            @if (currentUser()->hasPermission('create_sales'))
+            <h2 class="tile-title">المبيعات خارج الشركة</h2>
+            @if (currentUser()->hasPermission('create_marketing'))
             <div class="tile-title">
-                <a href="{{ route('admin.sales.company.create') }}" class="btn btn-success">اضاف جديد <i
+                <a href="{{ route('admin.marketing.sales.out_company.create') }}" class="btn btn-success">اضاف جديد <i
                         class="fa fa-plus fa-fw fa-lg" aria-hidden="true"></i></a>
             </div>
             @endif
             <div class="tile-body">
-                @if (isset($companySales) && count($companySales) > 0)
+                @if (isset($outCompanySales) && count($outCompanySales) > 0)
                 <div class="table-responsive">
                     <div id="dt_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
                         <div class="row">
@@ -48,27 +48,37 @@
                                                 aria-label="المنتج: activate to sort column descending">المنتج</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="dt" rowspan="1"
                                                 colspan="1" aria-sort="ascending"
+                                                aria-label="يوجد وسيط: activate to sort column descending">يوجد وسيط
+                                            </th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="dt" rowspan="1"
+                                                colspan="1" aria-sort="ascending"
                                                 aria-label="السعر: activate to sort column descending">السعر</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="dt" rowspan="1"
+                                                colspan="1" aria-sort="ascending"
+                                                aria-label="الدلالة: activate to sort column descending">الدلالة</th>
                                             <th>التحكم</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($companySales as $index=>$company)
+                                        @foreach ($outCompanySales as $index=>$outCompany)
                                         <tr role="row" class="{{ $index % 2 == 0 ? 'even' : 'odd' }}">
                                             <td class="sorting_1">
-                                                {{ $company->created_at->toDateString() }}</td>
-                                            <td class="sorting_1">{{ $company->buyer_name }}</td>
-                                            <td class="sorting_1">{{ $company->buyer_phone }}</td>
-                                            <td class="sorting_1">{{ $company->product->name }}</td>
-                                            <td class="sorting_1">{{ formatNumber($company->price) }}</td>
+                                                {{ $outCompany->created_at->toDateString() }}</td>
+                                            <td class="sorting_1">{{ $outCompany->buyer_name }}</td>
+                                            <td class="sorting_1">{{ $outCompany->buyer_phone }}</td>
+                                            <td class="sorting_1">{{ $outCompany->product->name }}</td>
+                                            <td class="sorting_1">{{ $outCompany->getWasit() }}</td>
+                                            <td class="sorting_1">{{ formatNumber($outCompany->price) }}</td>
+                                            <td class="sorting_1">{{ $outCompany->indication }}</td>
                                             <td>
-                                                @if (currentUser()->hasPermission('update_sales'))
-                                                <a href="{{ route('admin.sales.company.edit',$company->id) }}"
+                                                @if (currentUser()->hasPermission('update_marketing'))
+                                                <a href="{{ route('admin.marketing.sales.out_company.edit',$outCompany->id) }}"
                                                     class="btn btn-warning btn-sm ml-3"><i
                                                         class="fa fa-pencil-square fa-lg"></i> تعديل</a>
                                                 @endif
-                                                @if (currentUser()->hasPermission('delete_sales'))
-                                                <form action="{{ route('admin.sales.company.delete',$company->id) }}"
+                                                @if (currentUser()->hasPermission('delete_marketing'))
+                                                <form
+                                                    action="{{ route('admin.marketing.sales.out_company.delete',$outCompany->id) }}"
                                                     method="POST" style="display:inline-block" class="ml-3">
                                                     @csrf
                                                     <button type="submit" class="btn btn-danger btn-sm delete"><i

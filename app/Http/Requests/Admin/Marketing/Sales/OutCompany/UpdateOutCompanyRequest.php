@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Admin\Sales\Company;
+namespace App\Http\Requests\Admin\Marketing\Sales\OutCompany;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
-class CompanyRequest extends FormRequest
+class UpdateOutCompanyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,6 +18,7 @@ class CompanyRequest extends FormRequest
         return Auth::check();
     }
 
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -27,7 +29,9 @@ class CompanyRequest extends FormRequest
         return [
             'product' => ['required', 'exists:products,id', 'numeric'],
             'buyer_name' => ['required', 'string', 'max:190'],
-            'buyer_phone' => ['required', 'unique:company_sales', 'max:190'],
+            'buyer_phone' => ['required', Rule::unique('out_company_sales', 'buyer_phone')->ignore($this->id), 'max:190'],
+            'wasit' => ['required', 'in:1,0'],
+            'indication' => [],
             'price' => ['required'],
         ];
     }
@@ -45,7 +49,8 @@ class CompanyRequest extends FormRequest
             'string' => 'هذا الحقل يجب ان يكون احرف',
             'unique' => 'هذا الرقم موجود بالفعل',
             'exists' => 'هذا المنتج غير مسجل',
-            'max' => 'هذا الحقل يجب الا يزيد عن :max حرف'
+            'max' => 'هذا الحقل يجب الا يزيد عن :max حرف',
+            'in' => 'هذة القيمة خطأ'
         ];
     }
 }

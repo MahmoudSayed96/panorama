@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Sales\OutCompany\OutCompanyRequest;
-use App\Http\Requests\Admin\Sales\OutCompany\UpdateOutCompanyRequest;
+use App\Http\Requests\Admin\Marketing\Sales\OutCompany\OutCompanyRequest;
+use App\Http\Requests\Admin\Marketing\Sales\OutCompany\UpdateOutCompanyRequest;
 use App\Models\Product;
 use App\Models\Sales\OutCompanySales;
 use App\Providers\RouteServiceProvider;
@@ -19,22 +19,22 @@ class OutCompanySalesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:read_sales')->only('index');
-        $this->middleware('permission:create_sales')->only('create');
-        $this->middleware('permission:update_sales')->only('edit');
-        $this->middleware('permission:delete_sales')->only('destroy');
+        $this->middleware('permission:read_marketing')->only('index');
+        $this->middleware('permission:create_marketing')->only('create');
+        $this->middleware('permission:update_marketing')->only('edit');
+        $this->middleware('permission:delete_marketing')->only('destroy');
     }
 
     public function index()
     {
         $outCompanySales = OutCompanySales::latest()->paginate(self::PAGINATE);
-        return view('admin.sales.outCompany.index', compact('outCompanySales'));
+        return view('admin.marketing.sales.outCompany.index', compact('outCompanySales'));
     }
 
     public function create()
     {
         $products = Product::all();
-        return view('admin.sales.outCompany.create', compact('products'));
+        return view('admin.marketing.sales.outCompany.create', compact('products'));
     }
 
     public function store(OutCompanyRequest $request)
@@ -49,9 +49,9 @@ class OutCompanySalesController extends Controller
                 'wasit' => $request->wasit,
             ]);
 
-            return $this->redirectIfSuccess('admin.sales.out_company');
+            return $this->redirectIfSuccess('admin.marketing.sales.out_company');
         } catch (\Exception $ex) {
-            return $this->redirectIfError('admin.sales.out_company');
+            return $this->redirectIfError('admin.marketing.sales.out_company');
         }
     }
 
@@ -61,11 +61,11 @@ class OutCompanySalesController extends Controller
             $products = Product::all();
             $outCompany = OutCompanySales::findOrFail($id);
             if (!isset($outCompany)) {
-                return $this->redirectIfNotFound('admin.sales.out_company');
+                return $this->redirectIfNotFound('admin.marketing.sales.out_company');
             }
-            return view('admin.sales.outCompany.edit', compact('products', 'outCompany'));
+            return view('admin.marketing.sales.outCompany.edit', compact('products', 'outCompany'));
         } catch (\Exception $ex) {
-            return $this->redirectIfError('admin.sales.out_company');
+            return $this->redirectIfError('admin.marketing.sales.out_company');
         }
     }
 
@@ -74,7 +74,7 @@ class OutCompanySalesController extends Controller
         try {
             $outCompany = OutCompanySales::findOrFail($id);
             if (!isset($outCompany)) {
-                return $this->redirectIfNotFound('admin.sales.out_company');
+                return $this->redirectIfNotFound('admin.marketing.sales.out_company');
             }
             $outCompany->update([
                 'product_id' => $request->product,
@@ -84,9 +84,9 @@ class OutCompanySalesController extends Controller
                 'indication' => $request->indication,
                 'wasit' => $request->wasit,
             ]);
-            return $this->redirectIfSuccess('admin.sales.out_company', 'تم تعديل البيانات بنجاح');
+            return $this->redirectIfSuccess('admin.marketing.sales.out_company', 'تم تعديل البيانات بنجاح');
         } catch (\Exception $ex) {
-            return $this->redirectIfError('admin.sales.out_company');
+            return $this->redirectIfError('admin.marketing.sales.out_company');
         }
     }
 
@@ -95,12 +95,12 @@ class OutCompanySalesController extends Controller
         try {
             $outCompany = OutCompanySales::findOrFail($id);
             if (!isset($outCompany)) {
-                return $this->redirectIfNotFound('admin.sales.out_company');
+                return $this->redirectIfNotFound('admin.marketing.sales.out_company');
             }
             $outCompany->delete();
-            return $this->redirectIfSuccess('admin.sales.out_company', 'تم حذف البيانات بنجاح');
+            return $this->redirectIfSuccess('admin.marketing.sales.out_company', 'تم حذف البيانات بنجاح');
         } catch (\Exception $ex) {
-            return $this->redirectIfError('admin.sales.out_company');
+            return $this->redirectIfError('admin.marketing.sales.out_company');
         }
     }
 }

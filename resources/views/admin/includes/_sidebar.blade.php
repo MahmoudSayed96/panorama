@@ -40,44 +40,22 @@
             </ul>
         </li>
         @endif
-        {{-- Offers --}}
-        @if (currentUser()->isAbleTo('*_offers'))
-        <li class="treeview {{ is_active_route('offers') ? 'is-expanded' : '' }}">
-            <a class="app-menu__item {{ is_active_route('offers') ? 'active' : '' }}" href="#" data-toggle="treeview">
+        {{-- Marketing --}}
+        @if (currentUser()->isAbleTo('*_marketing'))
+        <li class="treeview {{ is_active_route('marketing') ? 'is-expanded' : '' }}">
+            <a class="app-menu__item {{ is_active_route('marketing') ? 'active' : '' }}" href="#"
+                data-toggle="treeview">
                 <i class="app-menu__icon fa fa-handshake-o"></i>
-                <span class="app-menu__label">العروض</span>
+                <span class="app-menu__label">التسويق</span>
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
             <ul class="treeview-menu">
-                @if (currentUser()->hasPermission('read_offers'))
-                <li><a class="treeview-item" href="{{ route('admin.offers') }}"><i class="icon fa fa-list"></i>عرض
-                        الكل</a></li>
-                @endif
-                @if (currentUser()->hasPermission('create_offers'))
-                <li><a class="treeview-item" href="{{ route('admin.offers.create') }}"><i
-                            class="icon fa fa-plus"></i>أضافة جديدة</a></li>
-                @endif
-            </ul>
-        </li>
-        @endif
-
-        {{-- Sales --}}
-        @if (currentUser()->isAbleTo('*_sales'))
-        <li class="treeview {{ is_active_route('sales') ? 'is-expanded' : '' }}">
-            <a class="app-menu__item {{ is_active_route('sales') ? 'active' : '' }}" href="#" data-toggle="treeview">
-                <i class="app-menu__icon fa fa-diamond"></i>
-                <span class="app-menu__label">المبيعات</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                @if (currentUser()->hasPermission('read_sales'))
-                <li><a class="treeview-item" href="{{ route('admin.sales.company') }}"><i
-                            class="icon fa fa-life-ring"></i>
-                        الشركة</a></li>
-                <li><a class="treeview-item" href="{{ route('admin.sales.out_company') }}"><i
-                            class="icon fa fa-map-marker"></i>
-                        خارج الشركة</a></li>
-                @endif
+                <li><a class="treeview-item" href="{{ route('admin.marketing.offers') }}"><i
+                            class="icon fa fa-diamond"></i>العروض</a></li>
+                <li><a class="treeview-item" href="{{ route('admin.marketing.sales.company') }}"><i
+                            class="icon fa fa-life-ring"></i>مبيعات الشركة</a></li>
+                <li><a class="treeview-item" href="{{ route('admin.marketing.sales.out_company') }}"><i
+                            class="icon fa fa-map-marker"></i>مبيعات خارج الشركة</a></li>
             </ul>
         </li>
         @endif

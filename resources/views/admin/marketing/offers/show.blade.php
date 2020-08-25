@@ -1,5 +1,5 @@
 @extends('layouts.admin.app')
-@section('title','العروض')
+@section('title','العروض |التسويق')
 @section('content')
 <div class="app-title">
     <div>
@@ -8,7 +8,8 @@
     <ul class="app-breadcrumb breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.welcome') }}"><i class="fa fa-dashboard"></i> الرئيسية</a>
         </li>
-        <li class="breadcrumb-item"><a href="{{ route('admin.offers') }}"><i class="fa fa-handshake-o"></i> العروض</a>
+        <li class="breadcrumb-item"><a href="{{ route('admin.marketing.offers') }}"><i class="fa fa-handshake-o"></i>
+                العروض</a>
         </li>
         <li class="breadcrumb-item active">عرض</li>
     </ul>

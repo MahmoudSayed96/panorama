@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Sales\Company\CompanyRequest;
-use App\Http\Requests\Admin\Sales\Company\UpdateCompanyRequest;
+use App\Http\Requests\Admin\Marketing\Sales\Company\CompanyRequest;
+use App\Http\Requests\Admin\Marketing\Sales\Company\UpdateCompanyRequest;
 use App\Models\Product;
 use App\Models\Sales\CompanySales;
 use App\Providers\RouteServiceProvider;
@@ -19,22 +19,22 @@ class CompanySalesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:read_sales')->only('index');
-        $this->middleware('permission:create_sales')->only('create');
-        $this->middleware('permission:update_sales')->only('edit');
-        $this->middleware('permission:delete_sales')->only('destroy');
+        $this->middleware('permission:read_marketing')->only('index');
+        $this->middleware('permission:create_marketing')->only('create');
+        $this->middleware('permission:update_marketing')->only('edit');
+        $this->middleware('permission:delete_marketing')->only('destroy');
     }
 
     public function index()
     {
         $companySales = CompanySales::latest()->paginate(self::PAGINATE);
-        return view('admin.sales.company.index', compact('companySales'));
+        return view('admin.marketing.sales.company.index', compact('companySales'));
     }
 
     public function create()
     {
         $products = Product::all();
-        return view('admin.sales.company.create', compact('products'));
+        return view('admin.marketing.sales.company.create', compact('products'));
     }
 
     public function store(CompanyRequest $request)
@@ -47,9 +47,9 @@ class CompanySalesController extends Controller
                 'price' => $request->price,
             ]);
 
-            return $this->redirectIfSuccess('admin.sales.company');
+            return $this->redirectIfSuccess('admin.marketing.sales.company');
         } catch (\Exception $ex) {
-            return $this->redirectIfError('admin.sales.company');
+            return $this->redirectIfError('admin.marketing.sales.company');
         }
     }
 
@@ -59,11 +59,11 @@ class CompanySalesController extends Controller
             $products = Product::all();
             $company = CompanySales::findOrFail($id);
             if (!isset($company)) {
-                return $this->redirectIfNotFound('admin.sales.company');
+                return $this->redirectIfNotFound('admin.marketing.sales.company');
             }
-            return view('admin.sales.company.edit', compact('products', 'company'));
+            return view('admin.marketing.sales.company.edit', compact('products', 'company'));
         } catch (\Exception $ex) {
-            return $this->redirectIfError('admin.sales.company');
+            return $this->redirectIfError('admin.marketing.sales.company');
         }
     }
 
@@ -72,7 +72,7 @@ class CompanySalesController extends Controller
         try {
             $company = CompanySales::findOrFail($id);
             if (!isset($company)) {
-                return $this->redirectIfNotFound('admin.sales.company');
+                return $this->redirectIfNotFound('admin.marketing.sales.company');
             }
             $company->update([
                 'product_id' => $request->product,
@@ -80,9 +80,9 @@ class CompanySalesController extends Controller
                 'buyer_phone' => $request->buyer_phone,
                 'price' => $request->price,
             ]);
-            return $this->redirectIfSuccess('admin.sales.company', 'تم تعديل البيانات بنجاح');
+            return $this->redirectIfSuccess('admin.marketing.sales.company', 'تم تعديل البيانات بنجاح');
         } catch (\Exception $ex) {
-            return $this->redirectIfError('admin.sales.company');
+            return $this->redirectIfError('admin.marketing.sales.company');
         }
     }
 
@@ -91,12 +91,12 @@ class CompanySalesController extends Controller
         try {
             $company = CompanySales::findOrFail($id);
             if (!isset($company)) {
-                return $this->redirectIfNotFound('admin.sales.company');
+                return $this->redirectIfNotFound('admin.marketing.sales.company');
             }
             $company->delete();
-            return $this->redirectIfSuccess('admin.sales.company', 'تم حذف البيانات بنجاح');
+            return $this->redirectIfSuccess('admin.marketing.sales.company', 'تم حذف البيانات بنجاح');
         } catch (\Exception $ex) {
-            return $this->redirectIfError('admin.sales.company');
+            return $this->redirectIfError('admin.marketing.sales.company');
         }
     }
 }

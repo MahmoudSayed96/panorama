@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Sales\OutCompany;
+namespace App\Http\Requests\Admin\Marketing\Sales\OutCompany;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;

@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Admin\Sales\Company;
+namespace App\Http\Requests\Admin\Marketing\Sales\Company;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 
-class UpdateCompanyRequest extends FormRequest
+class CompanyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,7 +27,7 @@ class UpdateCompanyRequest extends FormRequest
         return [
             'product' => ['required', 'exists:products,id', 'numeric'],
             'buyer_name' => ['required', 'string', 'max:190'],
-            'buyer_phone' => ['required', Rule::unique('company_sales', 'buyer_phone')->ignore($this->id), 'max:190'],
+            'buyer_phone' => ['required', 'unique:company_sales', 'max:190'],
             'price' => ['required'],
         ];
     }
