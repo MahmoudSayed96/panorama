@@ -17,6 +17,7 @@ return [
             'products' => 'c,r,u,d',
             'marketing' => 'c,r,u,d',
             'investments' => 'c,r,u,d',
+            'decorations' => 'c,r,u,d',
             'roles' => 'c,r,u,d',
         ],
         'admin' => [],

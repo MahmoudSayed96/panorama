@@ -38,6 +38,7 @@ Route::name('admin.')->prefix('admin')->group(function () {
         Route::post('/products/{id}/update', 'ProductController@update')->name('products.update');
         Route::post('/products/{id}/delete', 'ProductController@destroy')->name('products.delete');
 
+        // MARKETING ROUTES
         Route::name('marketing.')->prefix('marketing')->group(function () {
             //OFFERS ROUTES
             Route::get('/offers', 'OfferController@index')->name('offers');
@@ -113,6 +114,45 @@ Route::name('admin.')->prefix('admin')->group(function () {
             Route::post('/out-investments/{id}/delete', 'OutInvestmentController@destroy')->name('out_investments.delete');
         });
 
+        // DECORATION ROUTES
+        Route::name('decorations.')->prefix('decorations')->group(function () {
+            //COMPANY SALES ROUTES
+            Route::get('/company', 'CompanyDecorationController@index')->name('company');
+            Route::get('/company/create', 'CompanyDecorationController@create')->name('company.create');
+            Route::post('/company/store', 'CompanyDecorationController@store')->name('company.store');
+            Route::get('/company/{id}/show', 'CompanyDecorationController@show')->name('company.show');
+            Route::get('/company/{id}/edit', 'CompanyDecorationController@edit')->name('company.edit');
+            Route::post('/company/{id}/update', 'CompanyDecorationController@update')->name('company.update');
+            Route::post('/company/{id}/delete', 'CompanyDecorationController@destroy')->name('company.delete');
+
+            //OUT COMPANY SALES ROUTES
+            Route::get('/clients', 'ClientDecorationController@index')->name('clients');
+            Route::get('/clients/create', 'ClientDecorationController@create')->name('clients.create');
+            Route::post('/clients/store', 'ClientDecorationController@store')->name('clients.store');
+            Route::get('/clients/{id}/show', 'ClientDecorationController@show')->name('clients.show');
+            Route::get('/clients/{id}/edit', 'ClientDecorationController@edit')->name('clients.edit');
+            Route::post('/clients/{id}/update', 'ClientDecorationController@update')->name('clients.update');
+            Route::post('/clients/{id}/delete', 'ClientDecorationController@destroy')->name('clients.delete');
+        });
+
+        // ADVERTISING ROUTES
+        Route::name('advertising.')->prefix('advertising')->group(function () {
+            //COMPANY SALES ROUTES
+            Route::get('/company', 'CompanyAdvertisingController@index')->name('company');
+            Route::get('/company/create', 'CompanyAdvertisingController@create')->name('company.create');
+            Route::post('/company/store', 'CompanyAdvertisingController@store')->name('company.store');
+            Route::get('/company/{id}/edit', 'CompanyAdvertisingController@edit')->name('company.edit');
+            Route::post('/company/{id}/update', 'CompanyAdvertisingController@update')->name('company.update');
+            Route::post('/company/{id}/delete', 'CompanyAdvertisingController@destroy')->name('company.delete');
+
+            //OUT COMPANY SALES ROUTES
+            Route::get('/out', 'OutAdvertisingController@index')->name('out');
+            Route::get('/out/create', 'OutAdvertisingController@create')->name('out.create');
+            Route::post('/out/store', 'OutAdvertisingController@store')->name('out.store');
+            Route::get('/out/{id}/edit', 'OutAdvertisingController@edit')->name('out.edit');
+            Route::post('/out/{id}/update', 'OutAdvertisingController@update')->name('out.update');
+            Route::post('/out/{id}/delete', 'OutAdvertisingController@destroy')->name('out.delete');
+        });
 
         //ROLES ROUTES
         Route::get('/roles', 'RoleController@index')->name('roles');

@@ -1,15 +1,15 @@
 @extends('layouts.admin.app')
-@section('title','العروض |التسويق')
+@section('title','الديكور والاعلان')
 @section('content')
 <div class="app-title">
     <div>
-        <h1><i class="fa fa-handshake-o"></i> العروض</h1>
+        <h1><i class="fa fa-codepen"></i>الديكور والاعلان</h1>
     </div>
     <ul class="app-breadcrumb breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.welcome') }}"><i class="fa fa-dashboard"></i> الرئيسية</a>
         </li>
-        <li class="breadcrumb-item"><a href="{{ route('admin.marketing.offers') }}"><i class="fa fa-handshake-o"></i>
-                العروض</a>
+        <li class="breadcrumb-item"><a href="{{ route('admin.decorations.company') }}"><i class="fa fa-codepen"></i>
+                الديكور والاعلان</a>
         </li>
         <li class="breadcrumb-item active">عرض</li>
     </ul>
@@ -18,42 +18,38 @@
     <div class="col-12">
         <div class="tile">
             <div class="tile-body">
-                @if ($offer)
+                @if ($cmpDecoration)
                 <div class="row">
                     <div class="col-12 col-md-6">
-                        <h3 class="text-center mb-3">تفاصيل المنتج</h3>
+                        <h3 class="text-center mb-3">التفاصيل</h3>
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <strong> <i class="fa fa-building fa-lg text-primary ml-3"></i> نوع المنتج :
-                                </strong> {{ $offer->product->name }}
+                                <strong> <i class="fa fa-user fa-lg text-primary ml-3"></i> اسم العميل :
+                                </strong> {{ $cmpDecoration->client_name }}
                             </li>
                             <li class="list-group-item">
-                                <strong> <i class="fa fa-user fa-lg text-primary ml-3"></i> اسم صاحب المنتج :
-                                </strong> {{ $offer->prod_owner }}
+                                <strong> <i class="fa fa-phone fa-lg text-primary ml-3"></i>رقم هاتف العميل :
+                                </strong> {{ $cmpDecoration->client_phone }}
                             </li>
                             <li class="list-group-item">
-                                <strong> <i class="fa fa-phone fa-lg text-primary ml-3"></i> هاتف صاحب المنتج :
-                                </strong> {{ $offer->prod_owner_phone }}
+                                <strong> <i class="fa fa-money fa-lg text-primary ml-3"></i> المبلغ المدفوع :
+                                </strong> {{ formatNumber($cmpDecoration->paid_amount) }}
                             </li>
                             <li class="list-group-item">
-                                <strong> <i class="fa fa-map fa-lg text-primary ml-3"></i> المساحة :
-                                </strong> {{ $offer->prod_area }}
-                            </li>
-                            <li class="list-group-item">
-                                <strong> <i class="fa fa-money fa-lg text-primary ml-3"></i> السعر :
-                                </strong> {{ formatNumber($offer->prod_price) }}
+                                <strong> <i class="fa fa-calendar fa-lg text-primary ml-3"></i> تاريخ التسليم :
+                                </strong> {{ $cmpDecoration->delivered_date }}
                             </li>
                         </ul>
                     </div>
-                    @if ($offer->prod_photo)
+                    @if ($cmpDecoration->photos)
                     <div class="col-12 col-md-6">
-                        <h3 class="text-center mb-3 mt-3 mt-md-0">صور المنتج</h3>
+                        <h3 class="text-center mb-3 mt-3 mt-md-0">صور التصميم</h3>
                         <div class="show-img mx-auto">
-                            <img src="{{ asset($offer->prod_photo[0]) }}" class="img-fluid img-thumbnail" width="100%"
-                                height="300px">
+                            <img src="{{ asset($cmpDecoration->photos[0]) }}" class="img-fluid img-thumbnail"
+                                width="100%" height="300px">
                         </div>
                         <div class="gallery mt-3">
-                            @foreach ($offer->prod_photo as $img)
+                            @foreach ($cmpDecoration->photos as $img)
                             <img src="{{ asset($img) }}" class="img-fluid m-2" width="100px" height="100px">
                             @endforeach
                         </div>

@@ -97,6 +97,39 @@
         </li>
         @endif
 
+        {{-- Decorations & Advertising --}}
+        @if (currentUser()->isAbleTo('*_decorations'))
+        <li
+            class="treeview {{ is_active_route('decorations') || is_active_route('advertising') ? 'is-expanded' : '' }}">
+            <a class="app-menu__item {{ is_active_route('decorations') || is_active_route('advertising') ? 'active' : '' }}"
+                href="#" data-toggle="treeview">
+                <i class="app-menu__icon fa fa-codepen"></i>
+                <span class="app-menu__label">الديكور والإعلان</span>
+                <i class="treeview-indicator fa fa-angle-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                @if (currentUser()->hasPermission('read_decorations'))
+                <li><a class="treeview-item" href="{{ route('admin.decorations.company') }}"><i
+                            class="icon fa fa-file-image-o"></i>
+                        ديكورات الشركة</a></li>
+                <li><a class="treeview-item" href="{{ route('admin.decorations.clients') }}"><i
+                            class="icon fa fa-file-image-o"></i>
+                        ديكورات عملاء اخرين</a></li>
+                <li>
+                    <a class="treeview-item" href="{{ route('admin.advertising.company') }}"><i
+                            class="icon fa fa-television"></i>
+                        إعلانات الشركة</a>
+                </li>
+                <li>
+                    <a class="treeview-item" href="{{ route('admin.advertising.out') }}"><i
+                            class="icon fa fa-television"></i>
+                        إعلانات خارجية</a>
+                </li>
+                @endif
+            </ul>
+        </li>
+        @endif
+
         {{-- Roles --}}
         @if (currentUser()->isAbleTo('*_roles'))
         <li class="treeview {{ is_active_route('roles') ? 'is-expanded' : '' }}">

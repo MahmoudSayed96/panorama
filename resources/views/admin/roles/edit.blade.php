@@ -48,12 +48,13 @@
                             <h3 class="tile-title">الاذونات/الصلاحيات</h3>
                             @php
                             $permissions=['read_','create_','update_','delete_'];
-                            $modules=['users','products','marketing','investments','roles'];
+                            $modules=['users','products','marketing','investments','decorations','roles'];
                             $map = [
                             'users' =>'الموظفين',
                             'products'=>'المنتجات',
                             'marketing'=>'التسويق',
                             'investments'=>'الاستثمار',
+                            'decorations'=>'الديكوروالاعلان',
                             'roles'=>'الصلاحيات',
                             ];
                             @endphp
