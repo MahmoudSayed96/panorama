@@ -121,7 +121,7 @@
                         إعلانات الشركة</a>
                 </li>
                 <li>
-                    <a class="treeview-item" href="{{ route('admin.advertising.out') }}"><i
+                    <a class="treeview-item" href="{{ route('admin.advertising.clients') }}"><i
                             class="icon fa fa-television"></i>
                         إعلانات خارجية</a>
                 </li>

@@ -137,7 +137,7 @@ Route::name('admin.')->prefix('admin')->group(function () {
 
         // ADVERTISING ROUTES
         Route::name('advertising.')->prefix('advertising')->group(function () {
-            //COMPANY SALES ROUTES
+            //COMPANY ROUTES
             Route::get('/company', 'CompanyDesignController@index')->name('company');
             Route::get('/company/create', 'CompanyDesignController@create')->name('company.create');
             Route::post('/company/store', 'CompanyDesignController@store')->name('company.store');
@@ -146,14 +146,14 @@ Route::name('admin.')->prefix('admin')->group(function () {
             Route::post('/company/{id}/update', 'CompanyDesignController@update')->name('company.update');
             Route::post('/company/{id}/delete', 'CompanyDesignController@destroy')->name('company.delete');
 
-            //OUT COMPANY SALES ROUTES
-            Route::get('/out', 'OutDesignController@index')->name('out');
-            Route::get('/out/create', 'OutDesignController@create')->name('out.create');
-            Route::post('/out/store', 'OutDesignController@store')->name('out.store');
-            Route::get('/out/{id}/show', 'OutDesignController@show')->name('out.show');
-            Route::get('/out/{id}/edit', 'OutDesignController@edit')->name('out.edit');
-            Route::post('/out/{id}/update', 'OutDesignController@update')->name('out.update');
-            Route::post('/out/{id}/delete', 'OutDesignController@destroy')->name('out.delete');
+            //CLIENTS ROUTES
+            Route::get('/clients', 'ClientDesignController@index')->name('clients');
+            Route::get('/clients/create', 'ClientDesignController@create')->name('clients.create');
+            Route::post('/clients/store', 'ClientDesignController@store')->name('clients.store');
+            Route::get('/clients/{id}/show', 'ClientDesignController@show')->name('clients.show');
+            Route::get('/clients/{id}/edit', 'ClientDesignController@edit')->name('clients.edit');
+            Route::post('/clients/{id}/update', 'ClientDesignController@update')->name('clients.update');
+            Route::post('/clients/{id}/delete', 'ClientDesignController@destroy')->name('clients.delete');
         });
 
         //ROLES ROUTES
