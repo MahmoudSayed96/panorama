@@ -138,20 +138,22 @@ Route::name('admin.')->prefix('admin')->group(function () {
         // ADVERTISING ROUTES
         Route::name('advertising.')->prefix('advertising')->group(function () {
             //COMPANY SALES ROUTES
-            Route::get('/company', 'CompanyAdvertisingController@index')->name('company');
-            Route::get('/company/create', 'CompanyAdvertisingController@create')->name('company.create');
-            Route::post('/company/store', 'CompanyAdvertisingController@store')->name('company.store');
-            Route::get('/company/{id}/edit', 'CompanyAdvertisingController@edit')->name('company.edit');
-            Route::post('/company/{id}/update', 'CompanyAdvertisingController@update')->name('company.update');
-            Route::post('/company/{id}/delete', 'CompanyAdvertisingController@destroy')->name('company.delete');
+            Route::get('/company', 'CompanyDesignController@index')->name('company');
+            Route::get('/company/create', 'CompanyDesignController@create')->name('company.create');
+            Route::post('/company/store', 'CompanyDesignController@store')->name('company.store');
+            Route::get('/company/{id}/show', 'CompanyDesignController@show')->name('company.show');
+            Route::get('/company/{id}/edit', 'CompanyDesignController@edit')->name('company.edit');
+            Route::post('/company/{id}/update', 'CompanyDesignController@update')->name('company.update');
+            Route::post('/company/{id}/delete', 'CompanyDesignController@destroy')->name('company.delete');
 
             //OUT COMPANY SALES ROUTES
-            Route::get('/out', 'OutAdvertisingController@index')->name('out');
-            Route::get('/out/create', 'OutAdvertisingController@create')->name('out.create');
-            Route::post('/out/store', 'OutAdvertisingController@store')->name('out.store');
-            Route::get('/out/{id}/edit', 'OutAdvertisingController@edit')->name('out.edit');
-            Route::post('/out/{id}/update', 'OutAdvertisingController@update')->name('out.update');
-            Route::post('/out/{id}/delete', 'OutAdvertisingController@destroy')->name('out.delete');
+            Route::get('/out', 'OutDesignController@index')->name('out');
+            Route::get('/out/create', 'OutDesignController@create')->name('out.create');
+            Route::post('/out/store', 'OutDesignController@store')->name('out.store');
+            Route::get('/out/{id}/show', 'OutDesignController@show')->name('out.show');
+            Route::get('/out/{id}/edit', 'OutDesignController@edit')->name('out.edit');
+            Route::post('/out/{id}/update', 'OutDesignController@update')->name('out.update');
+            Route::post('/out/{id}/delete', 'OutDesignController@destroy')->name('out.delete');
         });
 
         //ROLES ROUTES

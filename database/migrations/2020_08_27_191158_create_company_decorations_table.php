@@ -17,7 +17,7 @@ class CreateCompanyDecorationsTable extends Migration
             $table->id();
             $table->string('client_name');
             $table->string('client_phone');
-            $table->string('photos');
+            $table->text('photos');
             $table->decimal('paid_amount', 10, 2);
             $table->date('delivered_date');
             $table->timestamps();
