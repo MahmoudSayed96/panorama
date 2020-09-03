@@ -8,10 +8,11 @@ use App\Http\Requests\Admin\Advertising\Client\UpdateRequest;
 use App\Models\Advertising\ClientDesign;
 use App\Providers\RouteServiceProvider;
 use App\Traits\ErrorHandlerTrait;
+use App\Traits\UploadImageTrait;
 
 class ClientDesignController extends Controller
 {
-    use ErrorHandlerTrait;
+    use ErrorHandlerTrait, UploadImageTrait;
 
     private const PAGINATE = RouteServiceProvider::PAGINATE_LIMIT;
 
@@ -43,7 +44,7 @@ class ClientDesignController extends Controller
                 'client_phone' => $request->client_phone,
                 'paid_amount' => $request->paid_amount,
                 'delivered_date' => $request->delivered_date,
-                'photos' => uploadMultipleImages('clientsDesigns', $request->file('photos'))
+                'photos' => $this->uploadMultipleImages('clientsDesigns', $request->file('photos'))
             ]);
             return $this->redirectIfSuccess('admin.advertising.clients');
         } catch (\Exception $ex) {
@@ -94,10 +95,10 @@ class ClientDesignController extends Controller
                 $old_images = $clientDesign->photos;
                 // Update new
                 $clientDesign->update([
-                    'photos' => uploadMultipleImages('clientsDesigns', $request->file('photos'))
+                    'photos' => $this->uploadMultipleImages('clientsDesigns', $request->file('photos'))
                 ]);
                 // Remove old images
-                removeMultipleImages($old_images);
+                $this->removeMultipleImages($old_images);
             }
             return $this->redirectIfSuccess('admin.advertising.clients');
         } catch (\Exception $ex) {
@@ -115,7 +116,7 @@ class ClientDesignController extends Controller
             $clientDesign->delete();
             $old_images = $clientDesign->photos;
             // Remove old images
-            removeMultipleImages($old_images);
+            $this->removeMultipleImages($old_images);
             return $this->redirectIfSuccess('admin.advertising.clients', 'تم حذف البيانات بنجاح');
         } catch (\Exception $ex) {
             return $this->redirectIfError('admin.advertising.clients');

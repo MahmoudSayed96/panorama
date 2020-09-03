@@ -8,11 +8,12 @@ use App\Http\Requests\Admin\Investments\OutInvestment\UpdateOutInvestmentRequest
 use App\Models\Investments\OutInvestment;
 use App\Providers\RouteServiceProvider;
 use App\Traits\ErrorHandlerTrait;
+use App\Traits\UploadImageTrait;
 
 class OutInvestmentController extends Controller
 {
 
-    use ErrorHandlerTrait;
+    use ErrorHandlerTrait, UploadImageTrait;
 
     private const PAGINATE = RouteServiceProvider::PAGINATE_LIMIT;
 
@@ -42,7 +43,7 @@ class OutInvestmentController extends Controller
             OutInvestment::create([
                 'client_name' => $request->client_name,
                 'client_phone' => $request->client_phone,
-                'client_photo' => uploadImage('investments', $request->file('client_photo')),
+                'client_photo' => $this->uploadImage('investments', $request->file('client_photo')),
                 'income_details' => $request->income_details,
                 'paid_amount' => $request->paid_amount,
                 'total_amount' => $request->total_amount
@@ -84,9 +85,9 @@ class OutInvestmentController extends Controller
             if ($request->has('client_photo')) {
                 $old_photo = $outInvestment->getPhoto();
                 // remove old image
-                removeImage($old_photo);
+                $this->removeImage($old_photo);
                 $outInvestment->update([
-                    'client_photo' => uploadImage('investments', $request->file('client_photo')),
+                    'client_photo' => $this->uploadImage('investments', $request->file('client_photo')),
                 ]);
             }
             return $this->redirectIfSuccess('admin.investments.out_investments', 'تم تعديل البيانات بنجاح');
@@ -105,7 +106,7 @@ class OutInvestmentController extends Controller
             $outInvestment->delete();
             $old_photo = $outInvestment->getPhoto();
             // remove old image
-            removeImage($old_photo);
+            $this->removeImage($old_photo);
             return $this->redirectIfSuccess('admin.investments.out_investments', 'تم حذف البيانات بنجاح');
         } catch (\Exception $ex) {
             return $this->redirectIfError('admin.investments.out_investments');

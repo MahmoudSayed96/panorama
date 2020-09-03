@@ -42,7 +42,7 @@ class User extends Authenticatable
 
     public function getPhotoAttribute()
     {
-        return isset($this->attributes['photo']) ? asset($this->attributes['photo']) : asset('uploads' . self::DS . 'images' . self::DS . 'users' . self::DS . 'user-avatar.png');
+        return isset($this->attributes['photo']) ? asset($this->attributes['photo']) : asset('uploads/images/users/user-avatar.png');
     }
 
     public function getPhoto()

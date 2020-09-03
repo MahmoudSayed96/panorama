@@ -8,11 +8,12 @@ use App\Http\Requests\Admin\Decorations\CompanyDecoration\UpdateRequest;
 use App\Models\Decoration\CompanyDecoration;
 use App\Providers\RouteServiceProvider;
 use App\Traits\ErrorHandlerTrait;
+use App\Traits\UploadImageTrait;
 
 class CompanyDecorationController extends Controller
 {
 
-    use ErrorHandlerTrait;
+    use ErrorHandlerTrait, UploadImageTrait;
 
     private const PAGINATE = RouteServiceProvider::PAGINATE_LIMIT;
 
@@ -44,7 +45,7 @@ class CompanyDecorationController extends Controller
                 'client_phone' => $request->client_phone,
                 'paid_amount' => $request->paid_amount,
                 'delivered_date' => $request->delivered_date,
-                'photos' => uploadMultipleImages('cmpDecorations', $request->file('photos'))
+                'photos' => $this->uploadMultipleImages('cmpDecorations', $request->file('photos'))
             ]);
             return $this->redirectIfSuccess('admin.decorations.company');
         } catch (\Exception $ex) {
@@ -95,10 +96,10 @@ class CompanyDecorationController extends Controller
                 $old_images = $cmpDecoration->photos;
                 // Update new
                 $cmpDecoration->update([
-                    'photos' => uploadMultipleImages('cmpDecorations', $request->file('photos'))
+                    'photos' => $this->uploadMultipleImages('cmpDecorations', $request->file('photos'))
                 ]);
                 // Remove old images
-                removeMultipleImages($old_images);
+                $this->removeMultipleImages($old_images);
             }
             return $this->redirectIfSuccess('admin.decorations.company');
         } catch (\Exception $ex) {
@@ -116,7 +117,7 @@ class CompanyDecorationController extends Controller
             $cmpDecoration->delete();
             $old_images = $cmpDecoration->photos;
             // Remove old images
-            removeMultipleImages($old_images);
+            $this->removeMultipleImages($old_images);
             return $this->redirectIfSuccess('admin.decorations.company', 'تم حذف البيانات بنجاح');
         } catch (\Exception $ex) {
             return $this->redirectIfError('admin.decorations.company');

@@ -9,10 +9,11 @@ use App\Models\Offer;
 use App\Models\Product;
 use App\Providers\RouteServiceProvider;
 use App\Traits\ErrorHandlerTrait;
+use App\Traits\UploadImageTrait;
 
 class OfferController extends Controller
 {
-    use ErrorHandlerTrait;
+    use ErrorHandlerTrait, UploadImageTrait;
 
     private const PAGINATE = RouteServiceProvider::PAGINATE_LIMIT;
 
@@ -46,7 +47,7 @@ class OfferController extends Controller
                 'prod_owner_phone' => $request->prod_owner_phone,
                 'prod_area' => $request->prod_area,
                 'prod_price' => $request->prod_price,
-                'prod_photo' => uploadMultipleImages('offers', $request->file('photos'))
+                'prod_photo' => $this->uploadMultipleImages('offers', $request->file('photos'))
             ]);
             return $this->redirectIfSuccess('admin.marketing.offers');
         } catch (\Exception $ex) {
@@ -99,10 +100,10 @@ class OfferController extends Controller
                 $old_images = $offer->prod_photo;
                 // Update new
                 $offer->update([
-                    'prod_photo' => uploadMultipleImages('offers', $request->file('photos'))
+                    'prod_photo' => $this->uploadMultipleImages('offers', $request->file('photos'))
                 ]);
                 // Remove old images
-                removeMultipleImages($old_images);
+                $this->removeMultipleImages($old_images);
             }
             return $this->redirectIfSuccess('admin.marketing.offers');
         } catch (\Exception $ex) {
@@ -120,7 +121,7 @@ class OfferController extends Controller
             $offer->delete();
             $old_images = $offer->prod_photo;
             // Remove old images
-            removeMultipleImages($old_images);
+            $this->removeMultipleImages($old_images);
             return $this->redirectIfSuccess('admin.marketing.offers', 'تم حذف البيانات بنجاح');
         } catch (\Exception $ex) {
             return $this->redirectIfError('admin.marketing.offers');

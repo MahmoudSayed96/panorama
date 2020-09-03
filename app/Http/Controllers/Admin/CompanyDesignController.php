@@ -8,10 +8,11 @@ use App\Http\Requests\Admin\Advertising\Company\UpdateRequest;
 use App\Models\Advertising\CompanyDesign;
 use App\Providers\RouteServiceProvider;
 use App\Traits\ErrorHandlerTrait;
+use App\Traits\UploadImageTrait;
 
 class CompanyDesignController extends Controller
 {
-    use ErrorHandlerTrait;
+    use ErrorHandlerTrait, UploadImageTrait;
 
     private const PAGINATE = RouteServiceProvider::PAGINATE_LIMIT;
 
@@ -43,7 +44,7 @@ class CompanyDesignController extends Controller
                 'client_phone' => $request->client_phone,
                 'paid_amount' => $request->paid_amount,
                 'delivered_date' => $request->delivered_date,
-                'photos' => uploadMultipleImages('cmpDesigns', $request->file('photos'))
+                'photos' => $this->uploadMultipleImages('cmpDesigns', $request->file('photos'))
             ]);
             return $this->redirectIfSuccess('admin.advertising.company');
         } catch (\Exception $ex) {
@@ -94,10 +95,10 @@ class CompanyDesignController extends Controller
                 $old_images = $cmpDesign->photos;
                 // Update new
                 $cmpDesign->update([
-                    'photos' => uploadMultipleImages('cmpDesigns', $request->file('photos'))
+                    'photos' => $this->uploadMultipleImages('cmpDesigns', $request->file('photos'))
                 ]);
                 // Remove old images
-                removeMultipleImages($old_images);
+                $this->removeMultipleImages($old_images);
             }
             return $this->redirectIfSuccess('admin.advertising.company');
         } catch (\Exception $ex) {
@@ -115,7 +116,7 @@ class CompanyDesignController extends Controller
             $cmpDesign->delete();
             $old_images = $cmpDesign->photos;
             // Remove old images
-            removeMultipleImages($old_images);
+            $this->removeMultipleImages($old_images);
             return $this->redirectIfSuccess('admin.advertising.company', 'تم حذف البيانات بنجاح');
         } catch (\Exception $ex) {
             return $this->redirectIfError('admin.advertising.company');

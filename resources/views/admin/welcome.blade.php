@@ -44,4 +44,9 @@
         </div>
     </div>
 </div>
+<div class="row">
+    {{ public_path() }}<br>
+    {{ asset('uploads') }}<br>
+    {{ url('uploads') }}
+</div>
 @endsection
