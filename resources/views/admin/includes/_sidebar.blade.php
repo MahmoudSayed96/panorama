@@ -130,6 +130,40 @@
         </li>
         @endif
 
+
+        {{-- Consulting & Constructions --}}
+        @if (currentUser()->isAbleTo('*_consulting'))
+        <li
+            class="treeview {{ is_active_route('consulting') || is_active_route('constructions') ? 'is-expanded' : '' }}">
+            <a class="app-menu__item {{ is_active_route('consulting') || is_active_route('constructions') ? 'active' : '' }}"
+                href="#" data-toggle="treeview">
+                <i class="app-menu__icon fa fa-wpexplorer"></i>
+                <span class="app-menu__label">الاستشارات والمقاولات</span>
+                <i class="treeview-indicator fa fa-angle-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                @if (currentUser()->hasPermission('read_consulting'))
+                <li><a class="treeview-item" href="{{ route('admin.consulting.company') }}"><i
+                            class="icon fa fa-certificate"></i>
+                        استشارات هندسية للشركة</a></li>
+                <li><a class="treeview-item" href="{{ route('admin.consulting.clients') }}"><i
+                            class="icon fa fa-certificate"></i>
+                        استشارات هندسية خارج الشركة</a></li>
+                <li>
+                    <a class="treeview-item" href="{{ route('admin.constructions.company') }}"><i
+                            class="icon fa fa-building"></i>
+                        مقاولات الشركة</a>
+                </li>
+                <li>
+                    <a class="treeview-item" href="{{ route('admin.constructions.clients') }}"><i
+                            class="icon fa fa-building"></i>
+                        مقاولات خارج الشركة</a>
+                </li>
+                @endif
+            </ul>
+        </li>
+        @endif
+
         {{-- Roles --}}
         @if (currentUser()->isAbleTo('*_roles'))
         <li class="treeview {{ is_active_route('roles') ? 'is-expanded' : '' }}">

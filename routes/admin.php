@@ -156,6 +156,48 @@ Route::name('admin.')->prefix('admin')->group(function () {
             Route::post('/clients/{id}/delete', 'ClientDesignController@destroy')->name('clients.delete');
         });
 
+        //  CONSULTING ROUTES
+        Route::name('consulting.')->prefix('consulting')->group(function () {
+            //COMPANY  ROUTES
+            Route::get('/company', 'CompanyConsultingController@index')->name('company');
+            Route::get('/company/create', 'CompanyConsultingController@create')->name('company.create');
+            Route::post('/company/store', 'CompanyConsultingController@store')->name('company.store');
+            Route::get('/company/{id}/show', 'CompanyConsultingController@show')->name('company.show');
+            Route::get('/company/{id}/edit', 'CompanyConsultingController@edit')->name('company.edit');
+            Route::post('/company/{id}/update', 'CompanyConsultingController@update')->name('company.update');
+            Route::post('/company/{id}/delete', 'CompanyConsultingController@destroy')->name('company.delete');
+
+            //OUT COMPANY  ROUTES
+            Route::get('/clients', 'ClientConsultingController@index')->name('clients');
+            Route::get('/clients/create', 'ClientConsultingController@create')->name('clients.create');
+            Route::post('/clients/store', 'ClientConsultingController@store')->name('clients.store');
+            Route::get('/clients/{id}/show', 'ClientConsultingController@show')->name('clients.show');
+            Route::get('/clients/{id}/edit', 'ClientConsultingController@edit')->name('clients.edit');
+            Route::post('/clients/{id}/update', 'ClientConsultingController@update')->name('clients.update');
+            Route::post('/clients/{id}/delete', 'ClientConsultingController@destroy')->name('clients.delete');
+        });
+
+        // CONSTRUCTIONS ROUTES
+        Route::name('constructions.')->prefix('constructions')->group(function () {
+            //COMPANY ROUTES
+            Route::get('/company', 'CompanyConstructionController@index')->name('company');
+            Route::get('/company/create', 'CompanyConstructionController@create')->name('company.create');
+            Route::post('/company/store', 'CompanyConstructionController@store')->name('company.store');
+            Route::get('/company/{id}/show', 'CompanyConstructionController@show')->name('company.show');
+            Route::get('/company/{id}/edit', 'CompanyConstructionController@edit')->name('company.edit');
+            Route::post('/company/{id}/update', 'CompanyConstructionController@update')->name('company.update');
+            Route::post('/company/{id}/delete', 'CompanyConstructionController@destroy')->name('company.delete');
+
+            //CLIENTS ROUTES
+            Route::get('/clients', 'ClientConstructionController@index')->name('clients');
+            Route::get('/clients/create', 'ClientConstructionController@create')->name('clients.create');
+            Route::post('/clients/store', 'ClientConstructionController@store')->name('clients.store');
+            Route::get('/clients/{id}/show', 'ClientConstructionController@show')->name('clients.show');
+            Route::get('/clients/{id}/edit', 'ClientConstructionController@edit')->name('clients.edit');
+            Route::post('/clients/{id}/update', 'ClientConstructionController@update')->name('clients.update');
+            Route::post('/clients/{id}/delete', 'ClientConstructionController@destroy')->name('clients.delete');
+        });
+
         //ROLES ROUTES
         Route::get('/roles', 'RoleController@index')->name('roles');
         Route::get('/roles/{id}/edit', 'RoleController@edit')->name('roles.edit');
