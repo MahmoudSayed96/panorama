@@ -4,45 +4,37 @@
 <div class="tile user-settings">
     @include('admin.includes._messages')
     <h4 class="line-head">الصفحة الشخصية</h4>
-    <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <div class="form-group">
-            <label>الاسم</label>
-            <input type="text" class="form-control" name="name" value="{{ currentUser()->name }}">
-            @error('name')
-            <div class="text-danger">{{ $message }}</div>
-            @enderror
-        </div>
-        <div class="form-group">
-            <label>البريد الالكترونى</label>
-            <input type="email" class="form-control" name="email" value="{{ currentUser()->email }}">
-            @error('email')
-            <div class="text-danger">{{ $message }}</div>
-            @enderror
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-12 col-md-6">
-                    <label>الصورة الشخصية</label>
-                    <input type="file" id="imgInp" class="form-control" name="photo">
-                    @error('photo')
-                    <div class="text-danger">{{ $message }}</div>
-                    @enderror
+    <hr>
+    <div class="profile">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <div class="user-img">
+                    <img src="{{ currentUser()->photo }}" class="img-fluid img-thumbnail p-2 circle" width="250px"
+                        alt="{{ currentUser()->name }}">
                 </div>
-                <div class="col-12 col-md-6">
-                    <img src="{{ currentUser()->photo }}" class="img-fluid img-thumbnail" width="100px" height="100px"
-                        id="imgPreview" alt="{{ currentUser()->name }}">
+            </div>
+            <div class="col-12 col-md-8">
+                <div class="info border-right">
+                    <div class="name d-flex align-items-center">
+                        <h4><i class="fa fa-user" aria-hidden="true"></i> الاسم : </h4>
+                        <h6 class="mt-2 mr-2">{{ currentUser()->name }}</h6>
+                    </div>
+                    <div class="name d-flex align-items-center">
+                        <h4><i class="fa fa-envelope" aria-hidden="true"></i> البريد الالكترونى : </h4>
+                        <h6 class="mt-2 mr-2">{{ currentUser()->email }}</h6>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row mb-10">
-            <div class="from-group">
-                <button type="button" class="btn btn-warning ml-1" onclick="history.back();"><i
-                        class="fa fa-fw -fa-lg fa-arrow-right"></i> تراجع</button>
-                <button class="btn btn-primary" type="submit"><i
-                        class="fa fa-fw fa-lg fa-check-circle"></i>تحديث</button>
-            </div>
+    </div>
+    <hr>
+    <div class="row mb-10 mt-5">
+        <div class="from-group">
+            <button type="button" class="btn btn-warning ml-1" onclick="history.back();"><i
+                    class="fa fa-fw -fa-lg fa-arrow-right"></i> تراجع</button>
+            <a class="btn btn-primary" href="{{ route('admin.profile.edit') }}"><i
+                    class="fa fa-fw fa-lg fa-check-circle"></i>تحديث</a>
         </div>
-    </form>
+    </div>
 </div>
 @endsection

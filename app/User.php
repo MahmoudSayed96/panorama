@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return isset($this->attributes['photo']) ? $this->attributes['photo'] : null;
     }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }

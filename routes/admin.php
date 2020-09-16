@@ -28,6 +28,7 @@ Route::name('admin.')->prefix('admin')->group(function () {
 
         //PROFILE ROUTES
         Route::get('/profile', 'ProfileController@show')->name('profile.show');
+        Route::get('/profile/edit', 'ProfileController@edit')->name('profile.edit');
         Route::post('/profile', 'ProfileController@update')->name('profile.update');
 
         //PRODUCTS ROUTES

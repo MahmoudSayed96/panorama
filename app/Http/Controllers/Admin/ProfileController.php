@@ -22,6 +22,11 @@ class ProfileController extends Controller
         return view('admin.profiles.show');
     }
 
+    public function edit()
+    {
+        return view('admin.profiles.edit');
+    }
+
     public function update(ProfileRequest $request)
     {
         try {
@@ -30,6 +35,14 @@ class ProfileController extends Controller
                 'name' => $request->name,
                 'email' => $request->email
             ]);
+
+            // Update password
+            if ($request->has('password')) {
+                $user->update([
+                    'password' => $request->password
+                ]);
+            }
+
             if ($request->has('photo')) {
                 $old_photo = $user->getPhoto();
                 if (isset($old_photo)) {
